@@ -5,6 +5,8 @@
 \alias{pttstability}
 \title{pttstability: Methods for Measuring Stability in Systems Without Static Equilibria}
 \source{
+Adam T. Clark, Lina K. Mühlbauer, Helmut Hillebrand, and Canan Karakoç. (2022). Measuring Stability in Ecological Systems Without Static Equilibria. Ecosphere 13(12):e4328.
+
 Knape, J., and Valpine, P. (2012). Fitting complex population models by combining particle filters with Markov chain Monte Carlo. Ecology 93:256-263.
 
 Ye, H., Sugihara, G., et al. (2015). Equation-free ecosystem forecasting. PNAS 112:E1569-E1576.
@@ -82,13 +84,18 @@ plot(y, type = "l", xlab="time", ylab="observed abundance")
 
 #get theta paramter for s-mapping
 # assume best E = 4
-# alternatively, we could run e.g. s_map(y, E=(2:5), silent = TRUE)
+# alternatively, we could use the EmbedDimension() function in rEDM
 # to test a range of potential E values
 Euse = 4
 #run leave-one-out cross validation
-s<-s_map(y, E=Euse, silent = TRUE)
-tuse<-s$theta[which.min(s$rmse)] # retain best theta
-plot(s$theta, s$rho, type="b")
+ydf = data.frame(time = 1:length(y), y=y)
+s_find_theta<-PredictNonlinear(dataFrame = ydf, E = Euse,
+                               columns = "y", lib = c(1, nrow(ydf)), pred = c(1, nrow(ydf)))
+
+tuse<-s_find_theta$Theta[which.max(s_find_theta$rho)] # retain best theta
+s <- SMap(dataFrame = ydf, E = Euse,
+          theta = tuse,
+          columns = "y", lib = c(1, nrow(ydf)), pred = c(1, nrow(ydf)))
 
 ## Run filter with "correct" parameter values
 N = 1e3 # number of particles
@@ -220,15 +227,8 @@ hist(exp(smp_EDM[,2]), xlim=c(exp(minvUSE_edm[2]), exp(maxvUSE_edm[2])),
                     main="EDM function", xlab="proc", breaks = 20)
 abline(v=exp(pars_true$proc), col=2) # true value
 abline(v=c(exp(minvUSE_edm[2]), exp(maxvUSE_edm[2])), col=1, lty=2)# Priors
-
-## compare total EDM coefficient prediction error to total model error
-s_full<-s_map(y, E=Euse, theta=tuse, silent = TRUE)
-
-# over-estimation of stochastic variance by EDM
-(mean(exp(smp_EDM[,1])^2 + exp(smp_EDM[,2])^2)-
-                    (exp(pars_true$proc)^2+exp(pars_true$obs[1])^2))
-# rmse due to EDM fitting error
-s_full$rmse[[1]]^2-(exp(pars_true$proc)^2+exp(pars_true$obs[1])^2)
 par(op) # reset plotting parameters
 }
 }
+\keyword{"_PACKAGE"}
+\keyword{internal}
