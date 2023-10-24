@@ -1,11 +1,11 @@
-a07269586423c0f916bd8311974f67b1 *DESCRIPTION
+fc93ece9475844d08f95566f62890dea *DESCRIPTION
 1fda90f2e29747503290dc8a9d19bd45 *NAMESPACE
 35bb0cc59b5450963ea4fddedfc8fc39 *R/bayesfun.R
 c35063db0bee7fe06a7f51550bccc989 *R/data.R
 bd5403664d27d8a0b861b7f98d675782 *R/fake_data.R
 b38519b6640181d3340401f81f993b88 *R/logit_funs.R
 30fce656ce0944c7737d036e84e326b4 *R/particlefilter.R
-686d07bc328add256264d2293f73bc9b *R/pttstability_man.R
+abebac69de598782e1ce15988a9770c9 *R/pttstability_man.R
 3e59296eb49265ac1bda20c39f1cb37e *data/dat.rda
 57d87c58ffd84b044a3ab01ed3c31308 *man/EDMfun0.Rd
 9cd2999593b09d2a8b7a1ec44a80b71e *man/colfun0.Rd
@@ -30,6 +30,6 @@ b806ec8ae7841bf4b4288983b106695d *man/obsfun0.Rd
 e9ed140dec79b0ba3146da7751fc17ae *man/process_scof.Rd
 6135364bfcd020ecbfcb59d2aa4c4fce *man/procfun0.Rd
 c1159457b509559fc40bdc793d891355 *man/procfun_ct.Rd
-aa456508c119cd98c487d086ded295fa *man/pttstability.Rd
+f7dc1b29e278329e99f6fc60fc9fabfa *man/pttstability.Rd
 4464f977f3e3b061842e404aa1b7abb5 *man/sampler_fun0.Rd
 a6123d2bae00d093b35c138919ce5e6e *man/sdproc_abstract.Rd

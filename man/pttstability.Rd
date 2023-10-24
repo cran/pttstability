@@ -89,7 +89,7 @@ plot(y, type = "l", xlab="time", ylab="observed abundance")
 Euse = 4
 #run leave-one-out cross validation
 ydf = data.frame(time = 1:length(y), y=y)
-s_find_theta<-PredictNonlinear(dataFrame = ydf, E = Euse,
+s_find_theta<-PredictNonlinear(dataFrame = ydf, E = Euse, showPlot = FALSE,
                                columns = "y", lib = c(1, nrow(ydf)), pred = c(1, nrow(ydf)))
 
 tuse<-s_find_theta$Theta[which.max(s_find_theta$rho)] # retain best theta
